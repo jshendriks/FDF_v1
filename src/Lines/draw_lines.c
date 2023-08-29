@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:06:32 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/29 17:09:38 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/29 17:19:05 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -39,8 +39,8 @@ static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x)
 			fdf_isometric_projection(&vec_from, x, y, array[y][x]);
 			fdf_isometric_projection(&vec_to, x + 1, y, array[y][x + 1]);
 			// JUST TO TEST !!! --------------------------------------------
-			fdf_scale(&vec_from, &vec_to, 120);
-			fdf_translate(&vec_from, &vec_to, 300);
+	/*		fdf_scale(&vec_from, &vec_to, 120);
+			fdf_translate(&vec_from, &vec_to, 400); */
 			// --------------------------------------------------------------
 			st_decide_line(vec_from, vec_to, data);
 		}
@@ -64,6 +64,10 @@ static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x)
 			array = *((data->map)->map_coord);
 			fdf_isometric_projection(&vec_from, x, y, array[y][x]);
 			fdf_isometric_projection(&vec_to, x, y + 1, array[y + 1][x]);
+			// JUST TO TEST !!! --------------------------------------------
+	/*		fdf_scale(&vec_from, &vec_to, 120);
+			fdf_translate(&vec_from, &vec_to, 400); */
+			// --------------------------------------------------------------
 			st_decide_line(vec_from, vec_to, data);
 		}
 	}
