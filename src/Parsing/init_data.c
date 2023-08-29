@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:46:51 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/28 15:04:36 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/29 10:04:04 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -47,8 +47,8 @@ static t_fdf_map_info	*st_init_map_info(t_fdf_map_info *map, char **argv)
 	check = fdf_allocate_array(map_coord, map);
 	if (check < 0)
 	{
-		free(map_coord);
-		return (free(*map_coord), NULL);
+		free(*map_coord);
+		return (free(map_coord), NULL);
 	}
 	check = 0;
 	check = fdf_init_coordinate_array(argv, map_coord, map);
@@ -56,7 +56,7 @@ static t_fdf_map_info	*st_init_map_info(t_fdf_map_info *map, char **argv)
 	{
 		if (map_coord != NULL)
 			fdf_free_int_array_until_j(map_coord, (map->rows), map);
-		return (NULL);
+		return (free(map_coord), NULL);
 	}
 	map->map_coord = map_coord;
 	return (map);

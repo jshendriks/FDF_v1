@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@42.fr>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/28 11:19:10 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/08/28 14:26:49 by jhendrik      ########   odam.nl          #
+#    Updated: 2023/08/29 11:52:22 by jhendrik      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,12 +53,16 @@ SRCFILES := Parsing/init_coordinate_array.c \
 			Parsing/parsing.c \
 			Utils/counting.c \
 			Utils/fdf_atoi.c \
+			Utils/math.c \
 			Utils/test_utils.c \
+			Lines/draw_lines.c \
+			Lines/bresenham_lines.c \
+			Lines/vertical_and_horizontal.c \
 			main.c
 OBJFILES := $(addprefix $(OBJDIR)/,$(SRCFILES:$(SRCEX)=$(OBJEX)))
 
 # Defining flags
-CFLAGS ?= -Wall -Werror -Wextra
+CFLAGS ?= -Wall -Werror -Wextra -g
 MLXFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw3
 
 # Prettifying output

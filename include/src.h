@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:22:30 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/28 14:54:45 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/29 11:00:58 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 
 typedef struct s_fdf_bresenham
 {
-	int	dx;
-	int	dy;
-	int	sign_dx;
-	int	sign_dy;
-	int	eps;
+	float	dx;
+	float	dy;
+	int		sign_dx;
+	int		sign_dy;
+	float	eps;
 }	t_fdf_bresenham;
 
 typedef struct s_fdf_image_info
@@ -55,6 +55,12 @@ typedef struct s_fdf_data
 	t_fdf_map_info		*map;
 }	t_fdf_data;
 
+typedef struct s_fdf_vec
+{
+	float	x;
+	float	y;
+}	t_fdf_vec;
+
 //FUNCTIONS FOR PARSING -----------------------------------------------------------------
 int	fdf_arg_check(int argc, char **argv);
 int32_t	fdf_init_data(t_fdf_data *data, char **argv);
@@ -66,6 +72,16 @@ int	fdf_allocate_array(int ***map_coord, t_fdf_map_info *map);
 //FUNCTIONS TO FREE ---------------------------------------------------------------------
 void	fdf_free_int_array_until_j(int ***map_coord, int j, t_fdf_map_info *map);
 void	fdf_free_split(char **ptr_subs);
+
+//FUNCTIONS TO CALCULATE ----------------------------------------------------------------
+void	fdf_isometric_projection(t_fdf_vec *vec, int x, int y, int z);
+float	fdf_abs_fl(float nb);
+
+//FUNCTIONS TO DRAW LINES ---------------------------------------------------------------
+void	fdf_draw_lines(t_fdf_data *data);
+void	fdf_vertical_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
+void	fdf_horizontal_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
+void	fdf_bresenham_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
 
 //FUNCTIONS TO TEST WITH -----------------------------------------------------------------
 void	fdf_print_array(t_fdf_map_info *map);
