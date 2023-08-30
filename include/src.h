@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:22:30 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/29 17:07:51 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/30 10:56:01 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,20 @@ void	fdf_free_split(char **ptr_subs);
 //FUNCTIONS TO CALCULATE ----------------------------------------------------------------
 void	fdf_isometric_projection(t_fdf_vec *vec, int x, int y, int z);
 float	fdf_abs_fl(float nb);
+float	fdf_max_x_value(t_fdf_data *data, float scale, int indicator);
+float	fdf_min_x_value(t_fdf_data *data, float scale, int indicator);
+float	fdf_max_y_value(t_fdf_data *data, float scale, int indicator);
+float	fdf_min_y_value(t_fdf_data *data, float scale, int indicator);
 
 //FUNCTIONS TO DRAW LINES ---------------------------------------------------------------
 void	fdf_draw_lines(t_fdf_data *data);
 void	fdf_vertical_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
 void	fdf_horizontal_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
 void	fdf_bresenham_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
-void	fdf_scale(t_fdf_vec *vec1, t_fdf_vec *vec2, float scale);
-void	fdf_translate(t_fdf_vec *vec1, t_fdf_vec *vec2, float translation);
+void	fdf_scale(t_fdf_vec *vec1, float scale);
+void	fdf_translate(t_fdf_vec *vec1, float translation);
+float	fdf_get_scale(t_fdf_data *data);
+float	fdf_get_translation(t_fdf_data *data, float scale);
 
 //FUNCTIONS TO TEST WITH -----------------------------------------------------------------
 void	fdf_print_array(t_fdf_map_info *map);

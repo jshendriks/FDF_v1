@@ -6,15 +6,17 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:39:39 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 10:14:33 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/30 11:19:06 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
 /* TO DODO:
 			- Escape key to close window 
-			- Find apropriate scale
-			- Find apropriate translation
+			- Find apropriate scale --> implementation seems to be working ...
+			- Find apropriate translation -->	implementation not perfect, with some maps
+												the map goes outside the window 
+													--> Need to adjust the function fdf_get_translation().
 			- Fix what is causing some files.fdf to look weird
 				Weird looking files:
 									+ 10-2
@@ -39,7 +41,7 @@ static int32_t	st_error_nofreeing(char *error_message)
 
 static void	st_terminate_map_info(t_fdf_map_info *map)
 {
-	fdf_free_int_array_until_j(map->map_coord, map->rows,map);
+	fdf_free_int_array_until_j(map->map_coord, map->rows, map);
 	free(map->map_coord);
 	free(map);
 }

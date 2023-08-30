@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:46:51 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/29 10:04:04 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/30 11:15:59 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -69,7 +69,7 @@ static t_fdf_image_info	*st_init_image_info(t_fdf_image_info *image)
 
 	if (image == NULL)
 		return (NULL);
-	image->width = 2000;
+	image->width = 1000;
 	image->height = 1000;
 	mlx = mlx_init((image->width), (image->height), "FDF????", true);
 	if (!mlx)
