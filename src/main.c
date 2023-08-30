@@ -6,10 +6,30 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:39:39 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/29 11:50:10 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/30 10:14:33 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
+
+/* TO DODO:
+			- Escape key to close window 
+			- Find apropriate scale
+			- Find apropriate translation
+			- Fix what is causing some files.fdf to look weird
+				Weird looking files:
+									+ 10-2
+									+ 10-70
+									+ 42
+									+ 20-60
+									+ pentenegpos
+									+ pyra
+									+ t1
+			- Fix that lines which you should not see do not get drawn
+				Example:
+						+ pylone
+						+ 42
+						+ t1
+*/
 
 static int32_t	st_error_nofreeing(char *error_message)
 {

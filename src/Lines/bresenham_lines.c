@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:57:13 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/29 17:18:25 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/30 09:56:50 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -32,8 +32,11 @@ static void	st_draw_line_incrementing_x(t_fdf_vec vec_from, t_fdf_vec vec_to, t_
 		y = vec_from.y;
 		while (x <= (vec_to.x))
 		{
-			if (x <= (data->image->width) && y <= (data->image->height))
-				mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+			if (x > 0 && x < (data->image->width))
+			{
+				if (y > 0 && y < (data->image->height))
+					mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+			}
 			(line.eps) += (line.dy);
 			if ((2 * (line.eps)) >= (line.dx))
 			{
@@ -58,8 +61,11 @@ static void	st_draw_line_incrementing_y(t_fdf_vec vec_from, t_fdf_vec vec_to, t_
 		y = vec_from.y;
 		while (y <= (vec_to.y))
 		{
-			if (x <= (data->image->width) && y <= (data->image->height))
-				mlx_put_pixel((data->image->img), x, y, 0xFFFFFFFF);
+			if (x > 0 && x < (data->image->width))
+			{
+				if (y > 0 && y < (data->image->height))
+					mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+			}
 			(line.eps) += (line.dx);
 			if ((2 * (line.eps)) >= (line.dy))
 			{

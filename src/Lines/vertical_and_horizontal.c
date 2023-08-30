@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:48:00 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/29 10:56:54 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/30 09:56:16 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -39,8 +39,11 @@ void	fdf_vertical_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
 			upper_bound = st_return_upperbound_and_set_beginning(vec_from.y, vec_to.y, &y);
 			while (y <= upper_bound)
 			{
-				if (x <= (data->image->width) && y <= (data->image->height))
-					mlx_put_pixel((data->image->img), x, y, 0xFFFFFFFF);
+				if (x > 0 && x < (data->image->width))
+				{
+					if (y > 0 && y < (data->image->height))
+						mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+				}
 				y++;
 			}
 		}
@@ -62,8 +65,11 @@ void	fdf_horizontal_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
 			upper_bound = st_return_upperbound_and_set_beginning(vec_from.x, vec_to.x, &x);
 			while (x <= upper_bound)
 			{
-				if (x <= (data->image->width) && y <= (data->image->height))
-					mlx_put_pixel((data->image->img), x, y, 0xFFFFFFFF);
+				if (x > 0 && x < (data->image->width))
+				{
+					if (y > 0 && y < (data->image->height))
+						mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+				}
 				x++;
 			}
 		}
