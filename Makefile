@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@42.fr>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/28 11:19:10 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/08/29 17:10:13 by jhendrik      ########   odam.nl          #
+#    Updated: 2023/08/31 16:47:58 by jhendrik      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,8 +96,8 @@ $(MLXLIB)/build:
 	git submodule update
 	@cmake $(MLXLIB) -B $(MLXLIB)/build && make -C $(MLXLIB)/build -j4
 
-$(NAME): $(OBJFILES) |$(OBJDIR)
-	@echo $(Light_Blue) Compiling $(NAME) $(Reset)
+$(NAME): $(OBJFILES) | $(OBJDIR)
+	@echo $(Light_Blue) Compiling ... $(NAME) $(Reset)
 	@$(CC) $(LIBS) $(OBJFILES) -o $(NAME) $(MLXFLAGS) $(MLXHEADER)
 	@echo $(Green) Succesfully made program $(NAME) $(Reset)
 
@@ -110,21 +110,22 @@ $(OBJDIR):
 	@mkdir $(OBJDIR)
 
 clean:
-	@rm -f $(OBJFILES)
-	@$(MAKE) cleandirs
+	@if [ -d $(OBJDIR) ]; then \
+		rm -R $(OBJDIR); \
+	fi
 	@$(MAKE) clean -C $(MYLIB)
-	@rm -rf $(MLXLIB)/build
+	@if [ -d $(MLXLIB)/build ]; then \
+		rm -rf $(MLXLIB)/build; \
+	fi
 	@echo $(Yellow) Files with extension $(OBJEX) are gone $(Reset)
 
 fclean: clean
-	@rm -f $(NAME)
+	@if [ -f $(NAME) ]; then \
+		$(RM) -f $(NAME); \
+	fi
 	@$(MAKE) fclean -C $(MYLIB)
 	@echo $(Yellow) The program $(NAME) is no more $(Reset)
 
-cleandirs: |$(OBJDIR)
-	@rm -R $(OBJDIR)
-	@$(MAKE) cleandirs -C $(MYLIB)
-
 re: fclean all
 
-.PHONY: all, clean, fclean, cleandirs, make_libs, re 
+.PHONY: all, clean, fclean, make_libs, re 

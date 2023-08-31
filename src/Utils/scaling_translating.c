@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 16:59:17 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 11:12:13 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/08/31 17:13:02 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -50,7 +50,7 @@ float	fdf_get_scale(t_fdf_data *data)
 		return (y_scale);
 }
 
-float	fdf_get_translation(t_fdf_data *data, float scale)
+/* float	fdf_get_translation(t_fdf_data *data, float scale)
 {
 	float	x_min;
 	float	x_max;
@@ -79,6 +79,48 @@ float	fdf_get_translation(t_fdf_data *data, float scale)
 			return (0);
 	}
 		
+} */
+
+static float	st_get_y_translation(t_fdf_data *data, float scale)
+{
+	float	y_min;
+	float	y_max;
+
+	y_max = fdf_max_y_value(data, scale, 0);
+	y_min = fdf_min_y_value(data, scale, 0);
+
+	if (fdf_abs_fl(y_min) < fdf_abs_fl((data->image->height) - y_max))
+		return ((-1) * y_min);
+	else
+		return ((data->image->height) - y_max);
+}
+
+static float	st_get_x_translation(t_fdf_data *data, float scale)
+{
+	float	x_min;
+	float	x_max;
+
+	x_max = fdf_max_x_value(data, scale, 0);
+	x_min = fdf_min_x_value(data, scale, 0);
+
+	if (fdf_abs_fl(x_min) < fdf_abs_fl((data->image->width) - x_max))
+		return ((-1) * x_min);
+	else
+		return ((data->image->width) - x_max);
+}
+
+float	fdf_get_translation(t_fdf_data *data, float scale)
+{
+	float	x_translation;
+	float	y_translation;
+
+	x_translation = st_get_x_translation(data, scale);
+	y_translation = st_get_y_translation(data, scale);
+
+	if (fdf_abs_fl(x_translation) > fdf_abs_fl(y_translation))
+		return (x_translation);
+	else
+		return (y_translation);
 }
 
 void	fdf_scale(t_fdf_vec *vec1, float scale)

@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/28 10:58:27 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/07/03 15:10:02 by jhendrik      ########   odam.nl          #
+#    Updated: 2023/08/31 17:07:23 by jhendrik      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,7 +112,6 @@ Bold="\033[1m"
 all: $(NAME)
 
 $(NAME): $(OBJFILES)
-	@echo $(Light_Blue) Compiling $(NAME) ...$(Reset)
 	@$(AR) -rsc $@ $^
 	@echo $(Green) Made $(NAME) succesfully! $(Reset)
 
@@ -129,17 +128,15 @@ $(OBJDIR):
 	@mkdir $@
 
 clean:
-	@rm -f $(OBJFILES) $(OBJFILES_BONUS)
-	@echo $(Yellow) Objectfiles of $(NAME) are gone $(Reset)
+	@if [ -d $(OBJDIR) ]; then \
+		rm -R $(OBJDIR); \
+	fi
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo $(Yellow) The archive $(NAME) fell into a black hole $(Reset)
-
-cleandirs: | $(OBJDIR)
-	@rm -R $(OBJDIR)
-	@echo $(Yellow) Removing directories with .o files $(Reset)
+	@if [ -f $(NAME) ]; then \
+		rm -f $(NAME); \
+	fi
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re, bonus, cleandirs
+.PHONY: all, clean, fclean, re, bonus
