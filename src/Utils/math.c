@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:25:12 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:17:21 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 16:00:09 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -33,20 +33,22 @@ float	fdf_abs_fl(float nb)
 
 float	fdf_max_x_value(t_fdf_data *data, float scale, int indicator)
 {
-	int	x;
-	int	y;
-	float	x_max;
+	int			x;
+	int			y;
+	int			**array;
+	float		x_max;
 	t_fdf_vec	vec;
 
 	y = 0;
 	vec.x = 0;
 	vec.y = 0;
+	array = (data->map->map_coord)[0];
 	while (y < (data->map->rows))
 	{
 		x = 0;
 		while (x < (data->map->columns))
 		{
-			fdf_isometric_projection(&vec, x, y, (data->map->map_coord)[0][y][x]);
+			fdf_isometric_projection(&vec, x, y, array[y][x]);
 			if (indicator == 0)
 				fdf_scale(&vec, scale);
 			if (x == 0 && y == 0)

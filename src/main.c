@@ -6,34 +6,10 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:39:39 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 11:19:14 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:26:22 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
-
-/* TO DODO:
-			- Escape key to close window --> implementation seems to be working ... 
-			- Find apropriate scale --> implementation seems to be working ...
-			- Find apropriate translation -->	implementation not perfect, with some maps
-												the map goes outside the window 
-													--> Need to adjust the function fdf_get_translation().
-												--> changed implementation to two get translation functions
-													this works !!!!
-			- Fix what is causing some files.fdf to look weird
-				Weird looking files:
-									+ 10-2
-									+ 10-70
-									+ 42
-									+ 20-60
-									+ pentenegpos
-									+ pyra
-									+ t1
-			- Fix that lines which you should not see do not get drawn
-				Example:
-						+ pylone
-						+ 42
-						+ t1
-*/
 
 static int32_t	st_error_nofreeing(char *error_message)
 {
@@ -41,34 +17,12 @@ static int32_t	st_error_nofreeing(char *error_message)
 	exit(EXIT_FAILURE);
 }
 
-static void	st_terminate_map_info(t_fdf_map_info *map)
-{
-	fdf_free_int_array_until_j(map->map_coord, map->rows, map);
-	free(map->map_coord);
-	free(map);
-}
-
-static void	st_terminate_image_info(t_fdf_image_info *image)
-{
-	mlx_delete_image(image->mlx, image->img);
-	mlx_terminate(image->mlx);
-	free(image);
-}
-
-static void	st_terminate_data_struct(t_fdf_data **data)
-{
-	st_terminate_image_info((*data)->image);
-	st_terminate_map_info((*data)->map);
-	free(*data);
-	data = NULL;
-}
-
 void	fdf_keyhook(mlx_key_data_t keydata, void *param)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		ft_printf("Exiting ...\n");
-		st_terminate_data_struct((t_fdf_data **)&param);
+		fdf_terminate_data_struct((t_fdf_data **)&param);
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -88,11 +42,11 @@ int32_t	main(int argc, char **argv)
 	if (mlx_image_to_window(data->image->mlx, data->image->img, 0, 0) < 0)
 	{
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
-		st_terminate_data_struct(&data);
+		fdf_terminate_data_struct(&data);
 		exit(EXIT_FAILURE);
 	}
 	mlx_key_hook(data->image->mlx, &fdf_keyhook, data);
 	mlx_loop(data->image->mlx);
-	st_terminate_data_struct(&data);
+	fdf_terminate_data_struct(&data);
 	exit(EXIT_SUCCESS);
 }

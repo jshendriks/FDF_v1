@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:46:51 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 10:55:16 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:33:46 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -32,7 +32,7 @@ static t_fdf_map_info	*st_init_map_info(t_fdf_map_info *map, char **argv)
 
 	columns = 0;
 	rows = 0;
-	check = fdf_counting_rows_and_columns(argv, &rows, &columns);
+	check = fdf_set_rows_and_columns(argv, &rows, &columns);
 	if (check < 0 || map == NULL)
 		return (NULL);
 	map->rows = rows;

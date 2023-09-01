@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:06:32 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 10:50:47 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:49:58 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -38,12 +38,10 @@ static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x, float
 			array = *((data->map)->map_coord);
 			fdf_isometric_projection(&vec_from, x, y, array[y][x]);
 			fdf_isometric_projection(&vec_to, x + 1, y, array[y][x + 1]);
-			// JUST TO TEST !!! --------------------------------------------
 			fdf_scale(&vec_from, scale);
 			fdf_translate(&vec_from, translation_x, translation_y);
 			fdf_scale(&vec_to, scale);
 			fdf_translate(&vec_to, translation_x, translation_y);
-			// --------------------------------------------------------------
 			st_decide_line(vec_from, vec_to, data);
 		}
 	}
@@ -66,12 +64,10 @@ static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x, float s
 			array = *((data->map)->map_coord);
 			fdf_isometric_projection(&vec_from, x, y, array[y][x]);
 			fdf_isometric_projection(&vec_to, x, y + 1, array[y + 1][x]);
-			// JUST TO TEST !!! --------------------------------------------
 			fdf_scale(&vec_from, scale);
 			fdf_translate(&vec_from, translation_x, translation_y);
 			fdf_scale(&vec_to, scale);
 			fdf_translate(&vec_to, translation_x, translation_y);
-			// --------------------------------------------------------------
 			st_decide_line(vec_from, vec_to, data);
 		}
 	}
@@ -87,11 +83,9 @@ void	fdf_draw_lines(t_fdf_data *data)
 
 	if (data != NULL)
 	{
-		// TESTING PHASE -------------------------------------
 		scale = fdf_get_scale(data);
 		translation_x = fdf_get_x_translation(data, scale) + 2;
 		translation_y = fdf_get_y_translation(data, scale) + 2;
-		//----------------------------------------------------
 		y = 0;
 		while (y < (data->map->rows))
 		{

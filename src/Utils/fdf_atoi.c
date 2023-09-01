@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 12:50:13 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/28 14:33:09 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:58:21 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -14,7 +14,7 @@
 static int	st_rec_atoi(const char *str, int nb, int sgn, int *flw);
 
 static int	st_process_cdigit(const char *str, int nb, int sgn, int *flw)
-{	
+{
 	if (sgn == 1 || sgn == 0)
 	{
 		if (nb * 10 + (*str - '0') < 0)

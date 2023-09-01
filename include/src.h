@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:22:30 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 10:44:57 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:32:18 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,15 @@ int	fdf_arg_check(int argc, char **argv);
 int32_t	fdf_init_data(t_fdf_data *data, char **argv);
 int	fdf_init_coordinate_array(char **argv, int ***map_coord, t_fdf_map_info *map);
 int	fdf_atoi_overflw(const char *str, int *ptr_num);
-int	fdf_counting_rows_and_columns(char **argv, int *rows, int *columns);
+int	fdf_set_rows_and_columns(char **argv, int *rows, int *columns);
 int	fdf_allocate_array(int ***map_coord, t_fdf_map_info *map);
 
 //FUNCTIONS TO FREE ---------------------------------------------------------------------
 void	fdf_free_int_array_until_j(int ***map_coord, int j, t_fdf_map_info *map);
 void	fdf_free_split(char **ptr_subs);
+void	fdf_terminate_map_info(t_fdf_map_info *map);
+void	fdf_terminate_image_info(t_fdf_image_info *image);
+void	fdf_terminate_data_struct(t_fdf_data **data);
 
 //FUNCTIONS TO CALCULATE ----------------------------------------------------------------
 void	fdf_isometric_projection(t_fdf_vec *vec, int x, int y, int z);

@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 12:16:57 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/28 14:41:43 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:56:57 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -47,15 +47,21 @@ void	fdf_free_split(char **ptr_subs)
 	}
 }
 
-int	fdf_counting_rows_and_columns(char **argv, int *rows, int *columns)
+static int	st_free_upon_error(int fd, char *line, char **split)
+{
+	if (line != NULL)
+		free(line);
+	if (split != NULL)
+		fdf_free_split(split);
+	close(fd);
+	return (-1);
+}
+
+static int	st_counting_rows_and_columns(int fd, int *rows, int *columns)
 {
 	char	*line;
 	char	**split;
-	int		fd;
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0 || rows == NULL || columns == NULL)
-		return (-1);
 	line = get_next_line(fd);
 	if (line == NULL)
 		return (close(fd), -1);
@@ -64,22 +70,25 @@ int	fdf_counting_rows_and_columns(char **argv, int *rows, int *columns)
 	{
 		split = ft_split(line, ' ');
 		if (split == NULL)
-		{
-			close(fd);
-			return (free(line), -1);
-		}
+			return (st_free_upon_error(fd, line, NULL));
 		if ((*rows) == 0)
 			(*columns) = st_len_split(split);
 		else if (st_len_split(split) != (*columns))
-		{
-			close(fd);
-			fdf_free_split(split);
-			return (free(line), -1);
-		}
+			return (st_free_upon_error(fd, line split));
 		fdf_free_split(split);
 		free(line);
 		line = get_next_line(fd);
 		(*rows)++;
 	}
 	return (close(fd), 0);
+}
+
+int	fdf_set_rows_and_columns(char **argv, int *rows, int *columns)
+{
+	int		fd;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0 || rows == NULL || columns == NULL)
+		return (-1);
+	return (st_counting_rows_and_columns(fd, rows, columns));
 }

@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@42.fr>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/28 11:19:10 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/08/31 16:47:58 by jhendrik      ########   odam.nl          #
+#    Updated: 2023/09/01 16:24:31 by jhendrik      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,16 @@ SUBDIRS := libs \
 		   libs/libft \
 		   libs/MLX42 \
 		   Utils \
-		   Parsing
+		   Parsing \
+		   Lines
 SRCDIRS := $(foreach dir,$(SUBDIRS),$(addprefix $(SRCDIR)/,$(dir)))
 OBJDIRS := $(foreach dir,$(SUBDIRS),$(addprefix $(OBJDIR)/,$(dir)))
+
+NORMDIRS := libs/libft \
+			Utils \
+			Parsing \
+			Lines
+SRC_NORMDIRS := $(foreach dir,$(NORMDIRS),$(addprefix $(SRCDIR)/,$(dir)))
 
 MLXINCL := $(LIBDIR)/$(MLXDIR)/include/MLX42
 SRCINCL := ./include
@@ -55,6 +62,7 @@ SRCFILES := Parsing/init_coordinate_array.c \
 			Utils/fdf_atoi.c \
 			Utils/math.c \
 			Utils/scaling_translating.c \
+			Utils/terminate.c \
 			Utils/test_utils.c \
 			Lines/draw_lines.c \
 			Lines/bresenham_lines.c \
@@ -63,7 +71,7 @@ SRCFILES := Parsing/init_coordinate_array.c \
 OBJFILES := $(addprefix $(OBJDIR)/,$(SRCFILES:$(SRCEX)=$(OBJEX)))
 
 # Defining flags
-CFLAGS ?= -Wall -Werror -Wextra -g
+CFLAGS ?= -Wall -Wextra -Werror 
 MLXFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw3
 
 # Prettifying output
@@ -128,4 +136,8 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, make_libs, re 
+norbert:
+	norminette $(SRC_NORMDIRS)
+	norminette $(SRCDIR)/main.c
+
+.PHONY: all, clean, fclean, make_libs, re, norbert 
