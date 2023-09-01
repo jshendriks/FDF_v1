@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:22:30 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 10:56:01 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 10:44:57 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,10 @@ void	fdf_vertical_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
 void	fdf_horizontal_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
 void	fdf_bresenham_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data);
 void	fdf_scale(t_fdf_vec *vec1, float scale);
-void	fdf_translate(t_fdf_vec *vec1, float translation);
+void	fdf_translate(t_fdf_vec *vec1, float translation_x, float translation_y);
 float	fdf_get_scale(t_fdf_data *data);
-float	fdf_get_translation(t_fdf_data *data, float scale);
+float	fdf_get_x_translation(t_fdf_data *data, float scale);
+float	fdf_get_y_translation(t_fdf_data *data, float scale);
 
 //FUNCTIONS TO TEST WITH -----------------------------------------------------------------
 void	fdf_print_array(t_fdf_map_info *map);

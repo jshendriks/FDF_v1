@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:46:51 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 11:15:59 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 10:55:16 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -62,7 +62,7 @@ static t_fdf_map_info	*st_init_map_info(t_fdf_map_info *map, char **argv)
 	return (map);
 }
 
-static t_fdf_image_info	*st_init_image_info(t_fdf_image_info *image)
+static t_fdf_image_info	*st_init_image_info(t_fdf_image_info *image, char **argv)
 {
 	mlx_t	*mlx;
 	mlx_image_t	*img;
@@ -71,7 +71,7 @@ static t_fdf_image_info	*st_init_image_info(t_fdf_image_info *image)
 		return (NULL);
 	image->width = 1000;
 	image->height = 1000;
-	mlx = mlx_init((image->width), (image->height), "FDF????", true);
+	mlx = mlx_init((image->width), (image->height), argv[1], true);
 	if (!mlx)
 		return (NULL);
 	img = mlx_new_image(mlx, (image->width), (image->height));
@@ -96,7 +96,7 @@ int32_t	fdf_init_data(t_fdf_data *data, char **argv)
 	map = malloc(sizeof(t_fdf_map_info));
 	if (image == NULL || map == NULL || data == NULL)
 		st_free_shell(map, image, data, "failed to allocate memory");
-	check_img = st_init_image_info(image);
+	check_img = st_init_image_info(image, argv);
 	if (check_img != image)
 		st_free_shell(map, image, data, "failed to initialise window or image");
 	check_map = st_init_map_info(map, argv);

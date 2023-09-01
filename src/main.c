@@ -6,17 +6,19 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:39:39 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 11:19:06 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 11:19:14 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
 /* TO DODO:
-			- Escape key to close window 
+			- Escape key to close window --> implementation seems to be working ... 
 			- Find apropriate scale --> implementation seems to be working ...
 			- Find apropriate translation -->	implementation not perfect, with some maps
 												the map goes outside the window 
 													--> Need to adjust the function fdf_get_translation().
+												--> changed implementation to two get translation functions
+													this works !!!!
 			- Fix what is causing some files.fdf to look weird
 				Weird looking files:
 									+ 10-2
@@ -61,6 +63,16 @@ static void	st_terminate_data_struct(t_fdf_data **data)
 	data = NULL;
 }
 
+void	fdf_keyhook(mlx_key_data_t keydata, void *param)
+{
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		ft_printf("Exiting ...\n");
+		st_terminate_data_struct((t_fdf_data **)&param);
+		exit(EXIT_SUCCESS);
+	}
+}
+
 int32_t	main(int argc, char **argv)
 {
 	t_fdf_data	*data;
@@ -79,6 +91,7 @@ int32_t	main(int argc, char **argv)
 		st_terminate_data_struct(&data);
 		exit(EXIT_FAILURE);
 	}
+	mlx_key_hook(data->image->mlx, &fdf_keyhook, data);
 	mlx_loop(data->image->mlx);
 	st_terminate_data_struct(&data);
 	exit(EXIT_SUCCESS);

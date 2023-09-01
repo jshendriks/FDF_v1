@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:06:32 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 11:00:26 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 10:50:47 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -21,7 +21,7 @@ static void	st_decide_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *dat
 		fdf_bresenham_line(vec_from, vec_to, data);
 }
 
-static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x, float scale, float translation)
+static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x, float scale, float translation_x, float translation_y)
 {
 	int	**array;
 	t_fdf_vec	vec_from;
@@ -40,16 +40,16 @@ static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x, float
 			fdf_isometric_projection(&vec_to, x + 1, y, array[y][x + 1]);
 			// JUST TO TEST !!! --------------------------------------------
 			fdf_scale(&vec_from, scale);
-			fdf_translate(&vec_from, translation);
+			fdf_translate(&vec_from, translation_x, translation_y);
 			fdf_scale(&vec_to, scale);
-			fdf_translate(&vec_to, translation);
+			fdf_translate(&vec_to, translation_x, translation_y);
 			// --------------------------------------------------------------
 			st_decide_line(vec_from, vec_to, data);
 		}
 	}
 }
 
-static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x, float scale, float translation)
+static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x, float scale, float translation_x, float translation_y)
 {
 	int	**array;
 	t_fdf_vec	vec_from;
@@ -68,9 +68,9 @@ static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x, float s
 			fdf_isometric_projection(&vec_to, x, y + 1, array[y + 1][x]);
 			// JUST TO TEST !!! --------------------------------------------
 			fdf_scale(&vec_from, scale);
-			fdf_translate(&vec_from, translation);
+			fdf_translate(&vec_from, translation_x, translation_y);
 			fdf_scale(&vec_to, scale);
-			fdf_translate(&vec_to, translation);
+			fdf_translate(&vec_to, translation_x, translation_y);
 			// --------------------------------------------------------------
 			st_decide_line(vec_from, vec_to, data);
 		}
@@ -82,13 +82,15 @@ void	fdf_draw_lines(t_fdf_data *data)
 	int	x;
 	int	y;
 	float	scale;
-	float	translation;
+	float	translation_x;
+	float	translation_y;
 
 	if (data != NULL)
 	{
 		// TESTING PHASE -------------------------------------
 		scale = fdf_get_scale(data);
-		translation = fdf_get_translation(data, scale);
+		translation_x = fdf_get_x_translation(data, scale) + 2;
+		translation_y = fdf_get_y_translation(data, scale) + 2;
 		//----------------------------------------------------
 		y = 0;
 		while (y < (data->map->rows))
@@ -96,8 +98,8 @@ void	fdf_draw_lines(t_fdf_data *data)
 			x = 0;
 			while (x < (data->map->columns))
 			{
-				st_draw_line_neighbour_toright(data, y, x, scale, translation);
-				st_draw_line_neighbour_under(data, y, x, scale, translation);
+				st_draw_line_neighbour_toright(data, y, x, scale, translation_x, translation_y);
+				st_draw_line_neighbour_under(data, y, x, scale, translation_x, translation_y);
 				x++;
 			}
 			y++;

@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 16:59:17 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/31 17:13:02 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 10:44:36 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -81,7 +81,7 @@ float	fdf_get_scale(t_fdf_data *data)
 		
 } */
 
-static float	st_get_y_translation(t_fdf_data *data, float scale)
+float	fdf_get_y_translation(t_fdf_data *data, float scale)
 {
 	float	y_min;
 	float	y_max;
@@ -95,7 +95,7 @@ static float	st_get_y_translation(t_fdf_data *data, float scale)
 		return ((data->image->height) - y_max);
 }
 
-static float	st_get_x_translation(t_fdf_data *data, float scale)
+float	fdf_get_x_translation(t_fdf_data *data, float scale)
 {
 	float	x_min;
 	float	x_max;
@@ -109,7 +109,7 @@ static float	st_get_x_translation(t_fdf_data *data, float scale)
 		return ((data->image->width) - x_max);
 }
 
-float	fdf_get_translation(t_fdf_data *data, float scale)
+/* float	fdf_get_translation(t_fdf_data *data, float scale)
 {
 	float	x_translation;
 	float	y_translation;
@@ -121,7 +121,7 @@ float	fdf_get_translation(t_fdf_data *data, float scale)
 		return (x_translation);
 	else
 		return (y_translation);
-}
+} */
 
 void	fdf_scale(t_fdf_vec *vec1, float scale)
 {
@@ -134,13 +134,13 @@ void	fdf_scale(t_fdf_vec *vec1, float scale)
 	(vec1->y) = scale * y_old;
 }
 
-void	fdf_translate(t_fdf_vec *vec1, float translation)
+void	fdf_translate(t_fdf_vec *vec1, float translation_x, float translation_y)
 {
 	float	x_old;
 	float	y_old;
 
 	x_old = vec1->x;
 	y_old = vec1->y;
-	(vec1->x) = x_old + translation;
-	(vec1->y) = y_old + translation;
+	(vec1->x) = x_old + translation_x;
+	(vec1->y) = y_old + translation_y;
 }
