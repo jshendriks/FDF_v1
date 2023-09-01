@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:25:12 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 10:51:53 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:17:21 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -15,7 +15,7 @@ void	fdf_isometric_projection(t_fdf_vec *vec, int x, int y, int z)
 {
 	double	angle;
 
-	angle = (M_PI * 30) / 180;
+	angle = (M_PI * 45) / 180;
 	if (vec != NULL)
 	{
 		vec->x = (x - y) * cos(angle);
