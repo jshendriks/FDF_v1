@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@42.fr>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/28 11:19:10 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/09/01 16:24:31 by jhendrik      ########   odam.nl          #
+#    Updated: 2023/09/02 17:17:54 by jagna         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,10 @@ SRCFILES := Parsing/init_coordinate_array.c \
 			Utils/counting.c \
 			Utils/fdf_atoi.c \
 			Utils/math.c \
-			Utils/scaling_translating.c \
+			Utils/scaling.c \
+			Utils/translating.c \
+			Utils/critical_values_x.c \
+			Utils/critical_values_y.c \
 			Utils/terminate.c \
 			Utils/test_utils.c \
 			Lines/draw_lines.c \
@@ -72,7 +75,7 @@ OBJFILES := $(addprefix $(OBJDIR)/,$(SRCFILES:$(SRCEX)=$(OBJEX)))
 
 # Defining flags
 CFLAGS ?= -Wall -Wextra -Werror 
-MLXFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw3
+MLXFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw
 
 # Prettifying output
 # Reset
@@ -139,5 +142,6 @@ re: fclean all
 norbert:
 	norminette $(SRC_NORMDIRS)
 	norminette $(SRCDIR)/main.c
+	norminette ./include/src.h
 
 .PHONY: all, clean, fclean, make_libs, re, norbert 

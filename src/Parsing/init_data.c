@@ -6,24 +6,47 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:46:51 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:33:46 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/02 17:33:13 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-static int32_t	st_free_shell(t_fdf_map_info *map, t_fdf_image_info *image, t_fdf_data *data, char *message)
+static int32_t	st_free(t_map_inf *map, t_img_inf *img, t_data *data, char *s)
 {
 	if (map != NULL)
 		free(map);
-	if (image != NULL)
-		free(image);
+	if (img != NULL)
+		free(img);
 	if (data != NULL)
 		free(data);
-	ft_printf("Error: \t %s \n", message);
+	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd(s, 2);
+	ft_putstr_fd("\n", 2);
 	exit(EXIT_FAILURE);
 }
 
-static t_fdf_map_info	*st_init_map_info(t_fdf_map_info *map, char **argv)
+static int	st_alloc_init_maparray(t_map_inf *map, int ***map_coord, char **argv)
+{
+	int	check;
+
+	(*map_coord) = malloc((map->rows) * sizeof(int *));
+	if (*map_coord == NULL)
+		return (free(map_coord), -1);
+	check = fdf_allocate_array(map_coord, map);
+	if (check < 0)
+		return (free(map_coord), -1);
+	check = 0;
+	check = fdf_init_coord_array(argv, map_coord, map);
+	if (check < 0)
+	{
+		if (*map_coord != NULL)
+			fdf_free_int_array_until_j(map_coord, (map->rows), map);
+		return (free(map_coord), -1);
+	}
+	return (0);
+}
+
+static t_map_inf	*st_init_map_info(t_map_inf *map, char **argv)
 {
 	int	columns;
 	int	rows;
@@ -41,30 +64,16 @@ static t_fdf_map_info	*st_init_map_info(t_fdf_map_info *map, char **argv)
 	map_coord = malloc(sizeof(int **));
 	if (map_coord == NULL)
 		return (NULL);
-	(*map_coord) = malloc(rows * sizeof(int *));
-	if (*map_coord == NULL)
-		return (free(map_coord), NULL);
-	check = fdf_allocate_array(map_coord, map);
+	check = st_alloc_init_maparray(map, map_coord, argv);
 	if (check < 0)
-	{
-		free(*map_coord);
-		return (free(map_coord), NULL);
-	}
-	check = 0;
-	check = fdf_init_coordinate_array(argv, map_coord, map);
-	if (check < 0)
-	{
-		if (map_coord != NULL)
-			fdf_free_int_array_until_j(map_coord, (map->rows), map);
-		return (free(map_coord), NULL);
-	}
+		return (NULL);
 	map->map_coord = map_coord;
 	return (map);
 }
 
-static t_fdf_image_info	*st_init_image_info(t_fdf_image_info *image, char **argv)
+static t_img_inf	*st_init_image_info(t_img_inf *image, char **argv)
 {
-	mlx_t	*mlx;
+	mlx_t		*mlx;
 	mlx_image_t	*img;
 
 	if (image == NULL)
@@ -85,23 +94,23 @@ static t_fdf_image_info	*st_init_image_info(t_fdf_image_info *image, char **argv
 	return (image);
 }
 
-int32_t	fdf_init_data(t_fdf_data *data, char **argv)
+int32_t	fdf_init_data(t_data *data, char **argv)
 {
-	t_fdf_image_info	*image;
-	t_fdf_image_info	*check_img;
-	t_fdf_map_info		*map;
-	t_fdf_map_info		*check_map;
+	t_img_inf	*image;
+	t_img_inf	*check_img;
+	t_map_inf	*map;
+	t_map_inf	*check_map;
 
-	image = malloc(sizeof(t_fdf_image_info));
-	map = malloc(sizeof(t_fdf_map_info));
+	image = malloc(sizeof(t_img_inf));
+	map = malloc(sizeof(t_map_inf));
 	if (image == NULL || map == NULL || data == NULL)
-		st_free_shell(map, image, data, "failed to allocate memory");
+		st_free(map, image, data, "Allocating memory failed");
 	check_img = st_init_image_info(image, argv);
 	if (check_img != image)
-		st_free_shell(map, image, data, "failed to initialise window or image");
+		st_free(map, image, data, "Initialising image struct failed");
 	check_map = st_init_map_info(map, argv);
 	if (check_map != map)
-		st_free_shell(map, image, data, "failed to initialise map information struct");
+		st_free(map, image, data, "Initialising map struct failed");
 	data->image = image;
 	data->map = map;
 	return (0);

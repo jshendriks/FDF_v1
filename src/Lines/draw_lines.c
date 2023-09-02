@@ -6,12 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:06:32 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:49:58 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/02 17:16:21 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-static void	st_decide_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
+static void	st_decide_line(t_vec vec_from, t_vec vec_to, t_data *data)
 {
 	if (vec_from.x == vec_to.x)
 		fdf_vertical_line(vec_from, vec_to, data);
@@ -21,11 +21,11 @@ static void	st_decide_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *dat
 		fdf_bresenham_line(vec_from, vec_to, data);
 }
 
-static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x, float scale, float translation_x, float translation_y)
+static void	st_nghbr_toright(t_data *data, int y, int x, t_visual visual)
 {
-	int	**array;
-	t_fdf_vec	vec_from;
-	t_fdf_vec	vec_to;
+	int		**array;
+	t_vec	vec_from;
+	t_vec	vec_to;
 
 	if (data != NULL)
 	{
@@ -38,20 +38,20 @@ static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x, float
 			array = *((data->map)->map_coord);
 			fdf_isometric_projection(&vec_from, x, y, array[y][x]);
 			fdf_isometric_projection(&vec_to, x + 1, y, array[y][x + 1]);
-			fdf_scale(&vec_from, scale);
-			fdf_translate(&vec_from, translation_x, translation_y);
-			fdf_scale(&vec_to, scale);
-			fdf_translate(&vec_to, translation_x, translation_y);
+			fdf_scale(&vec_from, visual.scale);
+			fdf_translate(&vec_from, visual.transl_x, visual.transl_y);
+			fdf_scale(&vec_to, visual.scale);
+			fdf_translate(&vec_to, visual.transl_x, visual.transl_y);
 			st_decide_line(vec_from, vec_to, data);
 		}
 	}
 }
 
-static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x, float scale, float translation_x, float translation_y)
+static void	st_nghbr_under(t_data *data, int y, int x, t_visual visual)
 {
-	int	**array;
-	t_fdf_vec	vec_from;
-	t_fdf_vec	vec_to;
+	int		**array;
+	t_vec	vec_from;
+	t_vec	vec_to;
 
 	if (data != NULL)
 	{
@@ -64,36 +64,34 @@ static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x, float s
 			array = *((data->map)->map_coord);
 			fdf_isometric_projection(&vec_from, x, y, array[y][x]);
 			fdf_isometric_projection(&vec_to, x, y + 1, array[y + 1][x]);
-			fdf_scale(&vec_from, scale);
-			fdf_translate(&vec_from, translation_x, translation_y);
-			fdf_scale(&vec_to, scale);
-			fdf_translate(&vec_to, translation_x, translation_y);
+			fdf_scale(&vec_from, visual.scale);
+			fdf_translate(&vec_from, visual.transl_x, visual.transl_y);
+			fdf_scale(&vec_to, visual.scale);
+			fdf_translate(&vec_to, visual.transl_x, visual.transl_y);
 			st_decide_line(vec_from, vec_to, data);
 		}
 	}
 }
 
-void	fdf_draw_lines(t_fdf_data *data)
+void	fdf_draw_lines(t_data *data)
 {
-	int	x;
-	int	y;
-	float	scale;
-	float	translation_x;
-	float	translation_y;
+	int			x;
+	int			y;
+	t_visual	visual;
 
 	if (data != NULL)
 	{
-		scale = fdf_get_scale(data);
-		translation_x = fdf_get_x_translation(data, scale) + 2;
-		translation_y = fdf_get_y_translation(data, scale) + 2;
+		visual.scale = fdf_get_scale(data);
+		visual.transl_x = fdf_get_x_translation(data, visual.scale) + 2;
+		visual.transl_y = fdf_get_y_translation(data, visual.scale) + 2;
 		y = 0;
 		while (y < (data->map->rows))
 		{
 			x = 0;
 			while (x < (data->map->columns))
 			{
-				st_draw_line_neighbour_toright(data, y, x, scale, translation_x, translation_y);
-				st_draw_line_neighbour_under(data, y, x, scale, translation_x, translation_y);
+				st_nghbr_toright(data, y, x, visual);
+				st_nghbr_under(data, y, x, visual);
 				x++;
 			}
 			y++;

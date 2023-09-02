@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:57:13 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 09:56:50 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/02 14:43:42 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -19,23 +19,23 @@ static int	st_give_sign(float a)
 		return (1);
 }
 
-static void	st_draw_line_incrementing_x(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_bresenham line, t_fdf_data *data)
+static void	stdraw_incrx(t_vec from, t_vec to, t_bresenham line, t_data *data)
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 
 	if (line.sign_dx < 0)
-		fdf_bresenham_line(vec_to, vec_from, data);
+		fdf_bresenham_line(to, from, data);
 	else
 	{
-		x = vec_from.x;
-		y = vec_from.y;
-		while (x <= (vec_to.x))
+		x = from.x;
+		y = from.y;
+		while (x <= (int)(to.x))
 		{
 			if (x > 0 && x < (data->image->width))
 			{
 				if (y > 0 && y < (data->image->height))
-					mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+					mlx_put_pixel(data->image->img, x, y, 0xFFFFFFFF);
 			}
 			(line.eps) += (line.dy);
 			if ((2 * (line.eps)) >= (line.dx))
@@ -48,23 +48,23 @@ static void	st_draw_line_incrementing_x(t_fdf_vec vec_from, t_fdf_vec vec_to, t_
 	}
 }
 
-static void	st_draw_line_incrementing_y(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_bresenham line, t_fdf_data *data)
+static void	stdraw_incry(t_vec from, t_vec to, t_bresenham line, t_data *data)
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 
 	if (line.sign_dy < 0)
-		fdf_bresenham_line(vec_to, vec_from, data);
+		fdf_bresenham_line(to, from, data);
 	else
 	{
-		x = vec_from.x;
-		y = vec_from.y;
-		while (y <= (vec_to.y))
+		x = from.x;
+		y = from.y;
+		while (y <= (int)(to.y))
 		{
 			if (x > 0 && x < (data->image->width))
 			{
 				if (y > 0 && y < (data->image->height))
-					mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+					mlx_put_pixel((data->image->img), x, y, 0xFFFFFFFF);
 			}
 			(line.eps) += (line.dx);
 			if ((2 * (line.eps)) >= (line.dy))
@@ -77,9 +77,9 @@ static void	st_draw_line_incrementing_y(t_fdf_vec vec_from, t_fdf_vec vec_to, t_
 	}
 }
 
-void	fdf_bresenham_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
+void	fdf_bresenham_line(t_vec vec_from, t_vec vec_to, t_data *data)
 {
-	t_fdf_bresenham	line;
+	t_bresenham	line;
 
 	line.dx = fdf_abs_fl((vec_to.x) - (vec_from.x));
 	line.sign_dx = st_give_sign((vec_to.x) - (vec_from.x));
@@ -87,7 +87,7 @@ void	fdf_bresenham_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
 	line.sign_dy = st_give_sign((vec_to.y) - (vec_from.y));
 	line.eps = 0;
 	if (line.dx > line.dy)
-		st_draw_line_incrementing_x(vec_from, vec_to, line, data);
+		stdraw_incrx(vec_from, vec_to, line, data);
 	else
-		st_draw_line_incrementing_y(vec_from, vec_to, line, data);
+		stdraw_incry(vec_from, vec_to, line, data);
 }

@@ -6,12 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 13:44:46 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/28 14:57:05 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/02 16:11:46 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-void	fdf_print_array(t_fdf_map_info *map)
+void	fdf_print_array(t_map_inf *map)
 {
 	int	i;
 	int	j;
@@ -40,7 +40,7 @@ void	fdf_print_array(t_fdf_map_info *map)
 	}
 }
 
-void	fdf_print_image_info(t_fdf_image_info *image)
+void	fdf_print_image_info(t_img_inf *image)
 {
 	ft_printf("IMAGE INFO\n");
 	if (image != NULL)
@@ -53,7 +53,7 @@ void	fdf_print_image_info(t_fdf_image_info *image)
 	ft_printf("..........\n");
 }
 
-void	fdf_print_map_info(t_fdf_map_info *map)
+void	fdf_print_map_info(t_map_inf *map)
 {
 	ft_printf("MAP INFO\n");
 	if (map != NULL)
@@ -69,7 +69,7 @@ void	fdf_print_map_info(t_fdf_map_info *map)
 	ft_printf("..........\n");
 }
 
-void	fdf_print_data(t_fdf_data *data)
+void	fdf_print_data(t_data *data)
 {
 	ft_printf("Printing data\n");
 	if (data == NULL)
