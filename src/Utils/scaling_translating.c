@@ -6,12 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 16:59:17 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:18:55 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/04 20:44:35 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-static float	st_get_yaxis_scale(t_data *data)
+/* static float	st_get_yaxis_scale(t_data *data)
 {
 	float	y_max;
 	float	y_min;
@@ -48,7 +48,7 @@ float	fdf_get_scale(t_data *data)
 		return (x_scale);
 	else
 		return (y_scale);
-}
+} */
 
 /* float	fdf_get_translation(t_fdf_data *data, float scale)
 {
@@ -123,7 +123,7 @@ float	fdf_get_x_translation(t_data *data, float scale)
 		return (y_translation);
 } */
 
-void	fdf_scale(t_vec *vec1, float scale)
+/* void	fdf_scale(t_vec *vec1, float scale)
 {
 	float	x_old;
 	float	y_old;
@@ -132,7 +132,7 @@ void	fdf_scale(t_vec *vec1, float scale)
 	y_old = vec1->y;
 	(vec1->x) = scale * x_old;
 	(vec1->y) = scale * y_old;
-}
+} */
 
 void	fdf_translate(t_vec *vec1, float translation_x, float translation_y)
 {

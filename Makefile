@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@42.fr>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/28 11:19:10 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/09/04 20:37:35 by jagna         ########   odam.nl          #
+#    Updated: 2023/09/04 20:44:59 by jagna         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRCFILES := Parsing/init_coordinate_array.c \
 			Utils/terminate.c \
 			Utils/critical_values_x.c \
 			Utils/critical_values_y.c \
+			Utils/scaling.c \
 			Utils/test_utils.c \
 			Lines/draw_lines.c \
 			Lines/bresenham_lines.c \
