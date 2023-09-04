@@ -6,12 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:46:51 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:33:46 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:22:42 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-static int32_t	st_free_shell(t_fdf_map_info *map, t_fdf_image_info *image, t_fdf_data *data, char *message)
+static int32_t	st_free_shell(t_map_inf *map, t_img_inf *image, t_data *data, char *message)
 {
 	if (map != NULL)
 		free(map);
@@ -23,7 +23,7 @@ static int32_t	st_free_shell(t_fdf_map_info *map, t_fdf_image_info *image, t_fdf
 	exit(EXIT_FAILURE);
 }
 
-static t_fdf_map_info	*st_init_map_info(t_fdf_map_info *map, char **argv)
+static t_map_inf	*st_init_map_info(t_map_inf *map, char **argv)
 {
 	int	columns;
 	int	rows;
@@ -62,7 +62,7 @@ static t_fdf_map_info	*st_init_map_info(t_fdf_map_info *map, char **argv)
 	return (map);
 }
 
-static t_fdf_image_info	*st_init_image_info(t_fdf_image_info *image, char **argv)
+static t_img_inf	*st_init_image_info(t_img_inf *image, char **argv)
 {
 	mlx_t	*mlx;
 	mlx_image_t	*img;
@@ -85,15 +85,15 @@ static t_fdf_image_info	*st_init_image_info(t_fdf_image_info *image, char **argv
 	return (image);
 }
 
-int32_t	fdf_init_data(t_fdf_data *data, char **argv)
+int32_t	fdf_init_data(t_data *data, char **argv)
 {
-	t_fdf_image_info	*image;
-	t_fdf_image_info	*check_img;
-	t_fdf_map_info		*map;
-	t_fdf_map_info		*check_map;
+	t_img_inf	*image;
+	t_img_inf	*check_img;
+	t_map_inf		*map;
+	t_map_inf		*check_map;
 
-	image = malloc(sizeof(t_fdf_image_info));
-	map = malloc(sizeof(t_fdf_map_info));
+	image = malloc(sizeof(t_img_inf));
+	map = malloc(sizeof(t_map_inf));
 	if (image == NULL || map == NULL || data == NULL)
 		st_free_shell(map, image, data, "failed to allocate memory");
 	check_img = st_init_image_info(image, argv);

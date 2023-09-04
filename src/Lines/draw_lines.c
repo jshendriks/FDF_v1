@@ -6,12 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:06:32 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:49:58 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:25:35 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-static void	st_decide_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
+static void	st_decide_line(t_vec vec_from, t_vec vec_to, t_data *data)
 {
 	if (vec_from.x == vec_to.x)
 		fdf_vertical_line(vec_from, vec_to, data);
@@ -21,11 +21,11 @@ static void	st_decide_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *dat
 		fdf_bresenham_line(vec_from, vec_to, data);
 }
 
-static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x, float scale, float translation_x, float translation_y)
+static void	st_draw_line_neighbour_toright(t_data *data, int y, int x, float scale, float translation_x, float translation_y)
 {
 	int	**array;
-	t_fdf_vec	vec_from;
-	t_fdf_vec	vec_to;
+	t_vec	vec_from;
+	t_vec	vec_to;
 
 	if (data != NULL)
 	{
@@ -47,11 +47,11 @@ static void	st_draw_line_neighbour_toright(t_fdf_data *data, int y, int x, float
 	}
 }
 
-static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x, float scale, float translation_x, float translation_y)
+static void	st_draw_line_neighbour_under(t_data *data, int y, int x, float scale, float translation_x, float translation_y)
 {
 	int	**array;
-	t_fdf_vec	vec_from;
-	t_fdf_vec	vec_to;
+	t_vec	vec_from;
+	t_vec	vec_to;
 
 	if (data != NULL)
 	{
@@ -73,7 +73,7 @@ static void	st_draw_line_neighbour_under(t_fdf_data *data, int y, int x, float s
 	}
 }
 
-void	fdf_draw_lines(t_fdf_data *data)
+void	fdf_draw_lines(t_data *data)
 {
 	int	x;
 	int	y;

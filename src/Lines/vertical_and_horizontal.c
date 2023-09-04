@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:48:00 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 09:56:16 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:26:23 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -24,7 +24,7 @@ static int	st_return_upperbound_and_set_beginning(int a, int b, int *nb)
 	}
 }
 
-void	fdf_vertical_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
+void	fdf_vertical_line(t_vec vec_from, t_vec vec_to, t_data *data)
 {
 	int	x;
 	int	y;
@@ -50,7 +50,7 @@ void	fdf_vertical_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
 	}
 }
 
-void	fdf_horizontal_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
+void	fdf_horizontal_line(t_vec vec_from, t_vec vec_to, t_data *data)
 {
 	int	x;
 	int	y;

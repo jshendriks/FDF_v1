@@ -6,12 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 12:53:14 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/29 10:04:04 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:23:32 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-void	fdf_free_int_array_until_j(int ***map_coord, int j, t_fdf_map_info *map)
+void	fdf_free_int_array_until_j(int ***map_coord, int j, t_map_inf *map)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void	fdf_free_int_array_until_j(int ***map_coord, int j, t_fdf_map_info *map)
 	}
 }
 
-int fdf_allocate_array(int ***map_coord, t_fdf_map_info *map)
+int fdf_allocate_array(int ***map_coord, t_map_inf *map)
 {
 	int	row;
 
@@ -52,7 +52,7 @@ int fdf_allocate_array(int ***map_coord, t_fdf_map_info *map)
 	return (row);
 }
 
-static int	st_init_coordinate_row(char **split, int ***map_coord, int row, t_fdf_map_info *map)
+static int	st_init_coordinate_row(char **split, int ***map_coord, int row, t_map_inf *map)
 {
 	int	column;
 	int	flow;
@@ -78,7 +78,7 @@ static int	st_init_coordinate_row(char **split, int ***map_coord, int row, t_fdf
 	return (column);
 }
 
-int	fdf_init_coordinate_array(char **argv, int ***map_coord, t_fdf_map_info *map)
+int	fdf_init_coordinate_array(char **argv, int ***map_coord, t_map_inf *map)
 {
 	int		row;
 	int		column;

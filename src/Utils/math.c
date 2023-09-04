@@ -6,12 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:25:12 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 16:00:09 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:17:18 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-void	fdf_isometric_projection(t_fdf_vec *vec, int x, int y, int z)
+void	fdf_isometric_projection(t_vec *vec, int x, int y, int z)
 {
 	double	angle;
 
@@ -31,7 +31,7 @@ float	fdf_abs_fl(float nb)
 		return ((-1) * nb);
 }
 
-float	fdf_max_x_value(t_fdf_data *data, float scale, int indicator)
+/* float	fdf_max_x_value(t_fdf_data *data, float scale, int indicator)
 {
 	int			x;
 	int			y;
@@ -90,13 +90,13 @@ float	fdf_min_x_value(t_fdf_data *data, float scale, int indicator)
 	}
 	return (x_min);
 }
-
-float	fdf_max_y_value(t_fdf_data *data, float scale, int indicator)
+*/
+float	fdf_max_y_value(t_data *data, float scale, int indicator)
 {
 	int	x;
 	int	y;
 	float	y_max;
-	t_fdf_vec	vec;
+	t_vec	vec;
 
 	y = 0;
 	vec.x = 0;
@@ -120,12 +120,12 @@ float	fdf_max_y_value(t_fdf_data *data, float scale, int indicator)
 	return (y_max);
 }
 
-float	fdf_min_y_value(t_fdf_data *data, float scale, int indicator)
+float	fdf_min_y_value(t_data *data, float scale, int indicator)
 {
 	int	x;
 	int	y;
 	float	y_min;
-	t_fdf_vec	vec;
+	t_vec	vec;
 
 	y = 0;
 	vec.x = 0;

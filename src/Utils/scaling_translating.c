@@ -6,12 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 16:59:17 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 10:44:36 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:18:55 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-static float	st_get_yaxis_scale(t_fdf_data *data)
+static float	st_get_yaxis_scale(t_data *data)
 {
 	float	y_max;
 	float	y_min;
@@ -24,7 +24,7 @@ static float	st_get_yaxis_scale(t_fdf_data *data)
 	return ((data->image->height) / (fdf_abs_fl(y_max - y_min) + 2));
 }
 
-static float	st_get_xaxis_scale(t_fdf_data *data)
+static float	st_get_xaxis_scale(t_data *data)
 {
 	float	x_max;
 	float	x_min;
@@ -37,7 +37,7 @@ static float	st_get_xaxis_scale(t_fdf_data *data)
 	return ((data->image->width) / (fdf_abs_fl(x_max - x_min) + 2));
 }
 
-float	fdf_get_scale(t_fdf_data *data)
+float	fdf_get_scale(t_data *data)
 {
 	float	x_scale;
 	float	y_scale;
@@ -81,7 +81,7 @@ float	fdf_get_scale(t_fdf_data *data)
 		
 } */
 
-float	fdf_get_y_translation(t_fdf_data *data, float scale)
+float	fdf_get_y_translation(t_data *data, float scale)
 {
 	float	y_min;
 	float	y_max;
@@ -95,7 +95,7 @@ float	fdf_get_y_translation(t_fdf_data *data, float scale)
 		return ((data->image->height) - y_max);
 }
 
-float	fdf_get_x_translation(t_fdf_data *data, float scale)
+float	fdf_get_x_translation(t_data *data, float scale)
 {
 	float	x_min;
 	float	x_max;
@@ -123,7 +123,7 @@ float	fdf_get_x_translation(t_fdf_data *data, float scale)
 		return (y_translation);
 } */
 
-void	fdf_scale(t_fdf_vec *vec1, float scale)
+void	fdf_scale(t_vec *vec1, float scale)
 {
 	float	x_old;
 	float	y_old;
@@ -134,7 +134,7 @@ void	fdf_scale(t_fdf_vec *vec1, float scale)
 	(vec1->y) = scale * y_old;
 }
 
-void	fdf_translate(t_fdf_vec *vec1, float translation_x, float translation_y)
+void	fdf_translate(t_vec *vec1, float translation_x, float translation_y)
 {
 	float	x_old;
 	float	y_old;

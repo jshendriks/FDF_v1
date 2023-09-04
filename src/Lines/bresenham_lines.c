@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:57:13 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/08/30 09:56:50 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:24:42 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -19,7 +19,7 @@ static int	st_give_sign(float a)
 		return (1);
 }
 
-static void	st_draw_line_incrementing_x(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_bresenham line, t_fdf_data *data)
+static void	st_draw_line_incrementing_x(t_vec vec_from, t_vec vec_to, t_bresenham line, t_data *data)
 {
 	float	x;
 	float	y;
@@ -48,7 +48,7 @@ static void	st_draw_line_incrementing_x(t_fdf_vec vec_from, t_fdf_vec vec_to, t_
 	}
 }
 
-static void	st_draw_line_incrementing_y(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_bresenham line, t_fdf_data *data)
+static void	st_draw_line_incrementing_y(t_vec vec_from, t_vec vec_to, t_bresenham line, t_data *data)
 {
 	float	x;
 	float	y;
@@ -77,9 +77,9 @@ static void	st_draw_line_incrementing_y(t_fdf_vec vec_from, t_fdf_vec vec_to, t_
 	}
 }
 
-void	fdf_bresenham_line(t_fdf_vec vec_from, t_fdf_vec vec_to, t_fdf_data *data)
+void	fdf_bresenham_line(t_vec vec_from, t_vec vec_to, t_data *data)
 {
-	t_fdf_bresenham	line;
+	t_bresenham	line;
 
 	line.dx = fdf_abs_fl((vec_to.x) - (vec_from.x));
 	line.sign_dx = st_give_sign((vec_to.x) - (vec_from.x));

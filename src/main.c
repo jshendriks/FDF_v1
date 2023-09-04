@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:39:39 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:26:22 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:31:02 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -22,18 +22,18 @@ void	fdf_keyhook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		ft_printf("Exiting ...\n");
-		fdf_terminate_data_struct((t_fdf_data **)&param);
+		fdf_terminate_data_struct((t_data **)&param);
 		exit(EXIT_SUCCESS);
 	}
 }
 
 int32_t	main(int argc, char **argv)
 {
-	t_fdf_data	*data;
+	t_data	*data;
 
 	if (fdf_arg_check(argc, argv) == -1)
 		st_error_nofreeing("Wrong input, usage: ./fdf [NAME OF FILE].fdf \n");
-	data = malloc(sizeof(t_fdf_data));
+	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		st_error_nofreeing("Failed to create data struct \n");
 	fdf_init_data(data, argv);

@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 12:16:57 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:56:57 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/04 20:11:12 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -74,7 +74,7 @@ static int	st_counting_rows_and_columns(int fd, int *rows, int *columns)
 		if ((*rows) == 0)
 			(*columns) = st_len_split(split);
 		else if (st_len_split(split) != (*columns))
-			return (st_free_upon_error(fd, line split));
+			return (st_free_upon_error(fd, line, split));
 		fdf_free_split(split);
 		free(line);
 		line = get_next_line(fd);
