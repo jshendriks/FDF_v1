@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:25:12 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:17:18 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/04 20:37:11 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -90,7 +90,7 @@ float	fdf_min_x_value(t_fdf_data *data, float scale, int indicator)
 	}
 	return (x_min);
 }
-*/
+
 float	fdf_max_y_value(t_data *data, float scale, int indicator)
 {
 	int	x;
@@ -148,3 +148,4 @@ float	fdf_min_y_value(t_data *data, float scale, int indicator)
 	}
 	return (y_min);
 }
+*/
