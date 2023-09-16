@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 12:53:14 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:23:32 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 15:51:28 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -52,7 +52,7 @@ int fdf_allocate_array(int ***map_coord, t_map_inf *map)
 	return (row);
 }
 
-static int	st_init_coordinate_row(char **split, int ***map_coord, int row, t_map_inf *map)
+static int	st_init_row(char **split, int ***map_coord, int row, t_map_inf *map)
 {
 	int	column;
 	int	flow;
@@ -78,7 +78,7 @@ static int	st_init_coordinate_row(char **split, int ***map_coord, int row, t_map
 	return (column);
 }
 
-int	fdf_init_coordinate_array(char **argv, int ***map_coord, t_map_inf *map)
+/* int	fdf_init_coordinate_array(char **argv, int ***map_coord, t_map_inf *map)
 {
 	int		row;
 	int		column;
@@ -126,4 +126,51 @@ int	fdf_init_coordinate_array(char **argv, int ***map_coord, t_map_inf *map)
 	if (line != NULL)
 		free(line);
 	return ((map->size));
+} */
+static void	st_free_error(int fd, char *line, char **split)
+{
+	if (line != NULL)
+		free(line);
+	if (split != NULL)
+		fdf_free_split(split);
+	close(fd);
+}
+
+static int	st_init_array(int ***map_coord, t_map_inf *map, int fd)
+{
+	int		row;
+	char	*line;
+	char	**split;
+
+	line = get_next_line(fd);
+	if (line == NULL)
+		return (st_free_error(fd, line, NULL), -1);
+	row = 0;
+	while (line && row < (map->rows))
+	{
+		split = ft_split(line, ' ');
+		if (split == NULL)
+		{
+			fdf_free_int_array_until_j(map_coord, (map->rows), map);
+			return (st_free_error(fd, line, split), -1);
+		}
+		st_init_row(split, map_coord, row, map);
+		free(line);
+		fdf_free_split(split);
+		line = get_next_line(fd);
+		row++;
+	}
+	return (close(fd), (map->size));
+}
+
+int	fdf_init_coord_array(char **argv, int ***map_coord, t_map_inf *map)
+{
+	int		fd;
+
+	if (argv == NULL || map_coord == NULL)
+		return (-1);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	return (st_init_array(map_coord, map, fd));
 }

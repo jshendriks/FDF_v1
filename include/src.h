@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:22:30 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:38:39 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 15:46:06 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_crit
 //FUNCTIONS FOR PARSING -----------------------------------------------------------------
 int	fdf_arg_check(int argc, char **argv);
 int32_t	fdf_init_data(t_data *data, char **argv);
-int	fdf_init_coordinate_array(char **argv, int ***map_coord, t_map_inf *map);
+int	fdf_init_coord_array(char **argv, int ***map_coord, t_map_inf *map);
 int	fdf_atoi_overflw(const char *str, int *ptr_num);
 int	fdf_set_rows_and_columns(char **argv, int *rows, int *columns);
 int	fdf_allocate_array(int ***map_coord, t_map_inf *map);

@@ -6,7 +6,7 @@
 /*   By: jagna <marvin@42.fr>                         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/04 20:36:40 by jagna         #+#    #+#                 */
-/*   Updated: 2023/09/04 20:36:47 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 15:37:27 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -95,4 +95,3 @@ float	fdf_min_y_value(t_data *data, float scale, int indicator)
 	}
 	return (y_min);
 }
-

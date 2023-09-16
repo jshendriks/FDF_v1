@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/01 16:02:40 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:16:32 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 15:37:01 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -56,8 +56,8 @@ float	fdf_max_x_value(t_data *data, float scale, int indicator)
 
 static void	st_check_row_xmin(t_data *data, float *x_min, t_crit buc)
 {
-	int			x;
-	int			**array;
+	int		x;
+	int		**array;
 	t_vec	vec;
 
 	x = 0;
@@ -79,8 +79,8 @@ static void	st_check_row_xmin(t_data *data, float *x_min, t_crit buc)
 
 float	fdf_min_x_value(t_data *data, float scale, int indicator)
 {
-	int			y;
-	float		x_min;
+	int		y;
+	float	x_min;
 	t_crit	buc;
 
 	y = 0;

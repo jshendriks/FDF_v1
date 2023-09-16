@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:46:51 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:22:42 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 15:46:43 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -51,7 +51,7 @@ static t_map_inf	*st_init_map_info(t_map_inf *map, char **argv)
 		return (free(map_coord), NULL);
 	}
 	check = 0;
-	check = fdf_init_coordinate_array(argv, map_coord, map);
+	check = fdf_init_coord_array(argv, map_coord, map);
 	if (check < 0)
 	{
 		if (map_coord != NULL)
