@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 13:44:46 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:19:58 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 17:51:29 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -78,6 +78,20 @@ void	fdf_print_data(t_data *data)
 	{	
 		fdf_print_image_info(data->image);
 		fdf_print_map_info(data->map);
+	}
+	ft_printf(".............................\n");
+}
+
+void	fdf_print_visual_info(t_visual *vis)
+{
+	ft_printf("Printing visual data\n");
+	if (vis == NULL)
+		ft_printf("(NULL)\n");
+	else
+	{
+		printf("Translation x: %f \n", vis->transl_x);
+		printf("Translation y: %f \n", vis->transl_y);
+		printf("Scale: %f\n", vis->scale);
 	}
 	ft_printf(".............................\n");
 }

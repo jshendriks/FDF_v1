@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@42.fr>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/28 11:19:10 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/09/16 17:20:50 by jagna         ########   odam.nl          #
+#    Updated: 2023/09/16 17:37:39 by jhendrik      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ OBJFILES := $(addprefix $(OBJDIR)/,$(SRCFILES:$(SRCEX)=$(OBJEX)))
 
 # Defining flags
 CFLAGS ?= -Wall -Wextra -Werror 
-MLXFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw
+MLXFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw3
 
 # Prettifying output
 # Reset

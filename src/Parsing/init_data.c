@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:46:51 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 16:11:41 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 18:08:24 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -78,8 +78,8 @@ static t_img_inf	*st_init_image_info(t_img_inf *image, char **argv)
 
 	if (image == NULL)
 		return (NULL);
-	image->width = 900;
-	image->height = 900;
+	image->width = 2000;
+	image->height = 1000;
 	mlx = mlx_init((image->width), (image->height), argv[1], true);
 	if (!mlx)
 		return (NULL);

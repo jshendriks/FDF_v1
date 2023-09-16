@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:22:30 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 17:10:16 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 17:51:24 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ void	fdf_print_array(t_map_inf *map);
 void	fdf_print_image_info(t_img_inf *image);
 void	fdf_print_map_info(t_map_inf *map);
 void	fdf_print_data(t_data *data);
+void	fdf_print_visual_info(t_visual *vis);
 
 #endif

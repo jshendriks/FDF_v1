@@ -6,7 +6,7 @@
 /*   By: jagna <marvin@42.fr>                         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/04 20:47:49 by jagna         #+#    #+#                 */
-/*   Updated: 2023/09/04 20:47:56 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 18:04:47 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -18,7 +18,7 @@ float	fdf_get_y_translation(t_data *data, float scale)
 
 	y_max = fdf_max_y_value(data, scale, 0);
 	y_min = fdf_min_y_value(data, scale, 0);
-	if (fdf_abs_fl(y_min) < fdf_abs_fl((data->image->height) - y_max))
+	if (fdf_abs_fl(y_min) > fdf_abs_fl((data->image->height) - y_max))
 		return ((-1) * y_min);
 	else
 		return ((data->image->height) - y_max);

@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:06:32 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 17:12:38 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 18:05:28 by jhendrik      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -82,8 +82,11 @@ void	fdf_draw_lines(t_data *data)
 	if (data != NULL)
 	{
 		visual.scale = fdf_get_scale(data);
-		visual.transl_x = fdf_get_x_translation(data, visual.scale) + 2;
-		visual.transl_y = fdf_get_y_translation(data, visual.scale) + 2;
+	//	visual.scale = 60;
+		visual.transl_x = fdf_get_x_translation(data, visual.scale);
+		visual.transl_y = fdf_get_y_translation(data, visual.scale);
+//		visual.transl_y = 500;
+		fdf_print_visual_info(&visual);
 		y = 0;
 		while (y < (data->map->rows))
 		{
