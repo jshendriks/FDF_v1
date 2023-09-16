@@ -6,31 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 12:53:14 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 15:51:28 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 16:00:07 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
 
-void	fdf_free_int_array_until_j(int ***map_coord, int j, t_map_inf *map)
-{
-	int	i;
-
-	if (j > (map->rows))
-		j = (map->rows);
-	if (map_coord != NULL)
-	{
-		i = 0;
-		while (i < j)
-		{
-			free((*map_coord)[i]);
-			i++;
-		}
-		free(*map_coord);
-		*map_coord = NULL;
-	}
-}
-
-int fdf_allocate_array(int ***map_coord, t_map_inf *map)
+int	fdf_allocate_array(int ***map_coord, t_map_inf *map)
 {
 	int	row;
 
