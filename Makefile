@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@42.fr>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/28 11:19:10 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/09/16 15:33:54 by jagna         ########   odam.nl          #
+#    Updated: 2023/09/16 17:20:50 by jagna         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,7 +140,6 @@ fclean: clean
 re: fclean all
 
 norbert:
-	norminette $(SRC_NORMDIRS)
-	norminette $(SRCDIR)/main.c
+	norminette $(SRC_NORMDIRS) ./src/main.c
 
 .PHONY: all, clean, fclean, make_libs, re, norbert 

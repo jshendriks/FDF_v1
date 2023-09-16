@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:22:30 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 15:46:06 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 17:10:16 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ typedef struct s_crit
 		int	indicator;
 		float	scale;
 }	t_crit;
+
+typedef struct s_visual
+{
+	float	transl_x;
+	float	transl_y;
+	float	scale;
+}	t_visual;
 
 //FUNCTIONS FOR PARSING -----------------------------------------------------------------
 int	fdf_arg_check(int argc, char **argv);

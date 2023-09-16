@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/16 18:38:46 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/07/07 11:47:41 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/16 17:24:06 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -15,6 +15,7 @@ static char	*get_newline(int fd, int size, int nb_read, char *buff)
 {
 	char	*line;
 	int		fnd_n;
+	int		buff_len;
 
 	line = NULL;
 	fnd_n = gnl_strchr_i(buff, '\n');
@@ -28,10 +29,11 @@ static char	*get_newline(int fd, int size, int nb_read, char *buff)
 	}
 	if (nb_read > 0)
 		line = gnl_update_newline(line, buff, fnd_n, size);
+	buff_len = gnl_strlen_n(buff) - 1;
 	if (line == NULL)
-		return (gnl_mv_buff(buff, (int)(gnl_strlen_n(buff) - 1), size + 1), NULL);
+		return (gnl_mv_buff(buff, buff_len, size + 1), NULL);
 	if (nb_read <= 0)
-		gnl_mv_buff(buff, (int)(gnl_strlen_n(buff) - 1), size + 1);
+		gnl_mv_buff(buff, buff_len, size + 1);
 	if (nb_read == -1)
 		return (free(line), NULL);
 	return (line);

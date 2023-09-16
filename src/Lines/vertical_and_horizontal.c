@@ -6,11 +6,12 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:48:00 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:26:23 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/16 17:18:27 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
-static int	st_return_upperbound_and_set_beginning(int a, int b, int *nb)
+
+static int	st_set_upper_begin(int a, int b, int *nb)
 {
 	if (a < b)
 	{
@@ -36,13 +37,13 @@ void	fdf_vertical_line(t_vec vec_from, t_vec vec_to, t_data *data)
 		{
 			x = vec_from.x;
 			y = 0;
-			upper_bound = st_return_upperbound_and_set_beginning(vec_from.y, vec_to.y, &y);
+			upper_bound = st_set_upper_begin(vec_from.y, vec_to.y, &y);
 			while (y <= upper_bound)
 			{
 				if (x > 0 && x < (data->image->width))
 				{
 					if (y > 0 && y < (data->image->height))
-						mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+						mlx_put_pixel((data->image->img), x, y, 0xFFFFFFFF);
 				}
 				y++;
 			}
@@ -62,13 +63,13 @@ void	fdf_horizontal_line(t_vec vec_from, t_vec vec_to, t_data *data)
 		{
 			y = vec_from.y;
 			x = 0;
-			upper_bound = st_return_upperbound_and_set_beginning(vec_from.x, vec_to.x, &x);
+			upper_bound = st_set_upper_begin(vec_from.x, vec_to.x, &x);
 			while (x <= upper_bound)
 			{
 				if (x > 0 && x < (data->image->width))
 				{
 					if (y > 0 && y < (data->image->height))
-						mlx_put_pixel((data->image->img), (int)x, (int)y, 0xFFFFFFFF);
+						mlx_put_pixel((data->image->img), x, y, 0xFFFFFFFF);
 				}
 				x++;
 			}
