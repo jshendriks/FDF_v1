@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/29 10:06:32 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 18:05:28 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/27 11:55:13 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -38,9 +38,9 @@ static void	st_nghbr_toright(t_data *data, int y, int x, t_visual visual)
 			array = *((data->map)->map_coord);
 			fdf_isometric_projection(&vec_from, x, y, array[y][x]);
 			fdf_isometric_projection(&vec_to, x + 1, y, array[y][x + 1]);
-			fdf_scale(&vec_from, visual.scale);
+			fdf_scale(&vec_from, &visual);
 			fdf_translate(&vec_from, visual.transl_x, visual.transl_y);
-			fdf_scale(&vec_to, visual.scale);
+			fdf_scale(&vec_to, &visual);
 			fdf_translate(&vec_to, visual.transl_x, visual.transl_y);
 			st_decide_line(vec_from, vec_to, data);
 		}
@@ -64,9 +64,9 @@ static void	st_nghbr_under(t_data *data, int y, int x, t_visual visual)
 			array = *((data->map)->map_coord);
 			fdf_isometric_projection(&vec_from, x, y, array[y][x]);
 			fdf_isometric_projection(&vec_to, x, y + 1, array[y + 1][x]);
-			fdf_scale(&vec_from, visual.scale);
+			fdf_scale(&vec_from, &visual);
 			fdf_translate(&vec_from, visual.transl_x, visual.transl_y);
-			fdf_scale(&vec_to, visual.scale);
+			fdf_scale(&vec_to, &visual);
 			fdf_translate(&vec_to, visual.transl_x, visual.transl_y);
 			st_decide_line(vec_from, vec_to, data);
 		}
@@ -81,10 +81,11 @@ void	fdf_draw_lines(t_data *data)
 
 	if (data != NULL)
 	{
-		visual.scale = fdf_get_scale(data);
+		visual.scale_mult = fdf_get_scale_mult(data);
+		visual.scale_div = fdf_get_scale_div(data);
 	//	visual.scale = 60;
-		visual.transl_x = fdf_get_x_translation(data, visual.scale);
-		visual.transl_y = fdf_get_y_translation(data, visual.scale);
+		visual.transl_x = fdf_get_x_translation(data, &visual);
+		visual.transl_y = fdf_get_y_translation(data, &visual);
 //		visual.transl_y = 500;
 		fdf_print_visual_info(&visual);
 		y = 0;

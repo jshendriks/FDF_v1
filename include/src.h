@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 11:22:30 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 17:51:24 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/27 11:51:22 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,19 @@ typedef struct s_vec
 	float	y;
 }	t_vec;
 
-typedef struct s_crit
-{
-		int	y;
-		int	indicator;
-		float	scale;
-}	t_crit;
-
 typedef struct s_visual
 {
 	float	transl_x;
 	float	transl_y;
-	float	scale;
+	float	scale_mult;
+	float	scale_div;
 }	t_visual;
+
+typedef struct s_crit
+{
+		int			y;
+		t_visual	*visual;
+}	t_crit;
 
 //FUNCTIONS FOR PARSING -----------------------------------------------------------------
 int	fdf_arg_check(int argc, char **argv);
@@ -93,21 +93,22 @@ void	fdf_terminate_data_struct(t_data **data);
 //FUNCTIONS TO CALCULATE ----------------------------------------------------------------
 void	fdf_isometric_projection(t_vec *vec, int x, int y, int z);
 float	fdf_abs_fl(float nb);
-float	fdf_max_x_value(t_data *data, float scale, int indicator);
-float	fdf_min_x_value(t_data *data, float scale, int indicator);
-float	fdf_max_y_value(t_data *data, float scale, int indicator);
-float	fdf_min_y_value(t_data *data, float scale, int indicator);
+float	fdf_max_x_value(t_data *data, t_visual *visual);
+float	fdf_min_x_value(t_data *data, t_visual *vis);
+float	fdf_max_y_value(t_data *data, t_visual *visual);
+float	fdf_min_y_value(t_data *data, t_visual *visual);
 
 //FUNCTIONS TO DRAW LINES ---------------------------------------------------------------
 void	fdf_draw_lines(t_data *data);
 void	fdf_vertical_line(t_vec vec_from, t_vec vec_to, t_data *data);
 void	fdf_horizontal_line(t_vec vec_from, t_vec vec_to, t_data *data);
 void	fdf_bresenham_line(t_vec vec_from, t_vec vec_to, t_data *data);
-void	fdf_scale(t_vec *vec1, float scale);
+void	fdf_scale(t_vec *vec1, t_visual *vis);
 void	fdf_translate(t_vec *vec1, float translation_x, float translation_y);
-float	fdf_get_scale(t_data *data);
-float	fdf_get_x_translation(t_data *data, float scale);
-float	fdf_get_y_translation(t_data *data, float scale);
+float	fdf_get_scale_mult(t_data *data);
+float	fdf_get_scale_div(t_data *data);
+float	fdf_get_x_translation(t_data *data, t_visual *vis);
+float	fdf_get_y_translation(t_data *data, t_visual *vis);
 
 //FUNCTIONS TO TEST WITH -----------------------------------------------------------------
 void	fdf_print_array(t_map_inf *map);

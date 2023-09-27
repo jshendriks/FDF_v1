@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/01 16:02:40 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 15:37:01 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/27 11:45:05 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -24,8 +24,8 @@ static void	st_check_row_xmax(t_data *data, float *x_max, t_crit buc)
 	while (x < (data->map->columns))
 	{
 		fdf_isometric_projection(&vec, x, buc.y, array[buc.y][x]);
-		if (buc.indicator == 0)
-			fdf_scale(&vec, buc.scale);
+		if (buc.visual != NULL)
+			fdf_scale(&vec, buc.visual);
 		if (x == 0 && buc.y == 0)
 			(*x_max) = vec.x;
 		if (vec.x > (*x_max))
@@ -34,7 +34,7 @@ static void	st_check_row_xmax(t_data *data, float *x_max, t_crit buc)
 	}
 }
 
-float	fdf_max_x_value(t_data *data, float scale, int indicator)
+float	fdf_max_x_value(t_data *data, t_visual *visual)
 {
 	int		y;
 	float	x_max;
@@ -43,8 +43,7 @@ float	fdf_max_x_value(t_data *data, float scale, int indicator)
 	y = 0;
 	x_max = 0;
 	buc.y = y;
-	buc.indicator = indicator;
-	buc.scale = scale;
+	buc.visual = visual;
 	while (y < (data->map->rows))
 	{
 		buc.y = y;
@@ -67,8 +66,8 @@ static void	st_check_row_xmin(t_data *data, float *x_min, t_crit buc)
 	while (x < (data->map->columns))
 	{
 		fdf_isometric_projection(&vec, x, buc.y, array[buc.y][x]);
-		if (buc.indicator == 0)
-			fdf_scale(&vec, buc.scale);
+		if (buc.visual != NULL)
+			fdf_scale(&vec, buc.visual);
 		if (x == 0 && buc.y == 0)
 			(*x_min) = vec.x;
 		if (vec.x < (*x_min))
@@ -77,7 +76,7 @@ static void	st_check_row_xmin(t_data *data, float *x_min, t_crit buc)
 	}
 }
 
-float	fdf_min_x_value(t_data *data, float scale, int indicator)
+float	fdf_min_x_value(t_data *data, t_visual *vis)
 {
 	int		y;
 	float	x_min;
@@ -86,8 +85,7 @@ float	fdf_min_x_value(t_data *data, float scale, int indicator)
 	y = 0;
 	x_min = 0;
 	buc.y = y;
-	buc.indicator = indicator;
-	buc.scale = scale;
+	buc.visual = vis;	
 	while (y < (data->map->rows))
 	{
 		buc.y = y;

@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/28 13:44:46 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/16 17:51:29 by jhendrik      ########   odam.nl         */
+/*   Updated: 2023/09/27 11:53:29 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -91,7 +91,8 @@ void	fdf_print_visual_info(t_visual *vis)
 	{
 		printf("Translation x: %f \n", vis->transl_x);
 		printf("Translation y: %f \n", vis->transl_y);
-		printf("Scale: %f\n", vis->scale);
+		printf("Scale_mult: %f\n", vis->scale_mult);
+		printf("Scale_div: %f\n", vis->scale_div);
 	}
 	ft_printf(".............................\n");
 }
