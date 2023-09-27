@@ -6,7 +6,7 @@
 /*   By: jhendrik <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/01 16:02:40 by jhendrik      #+#    #+#                 */
-/*   Updated: 2023/09/27 11:45:05 by jagna         ########   odam.nl         */
+/*   Updated: 2023/09/27 12:29:02 by jagna         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "src.h"
@@ -85,7 +85,7 @@ float	fdf_min_x_value(t_data *data, t_visual *vis)
 	y = 0;
 	x_min = 0;
 	buc.y = y;
-	buc.visual = vis;	
+	buc.visual = vis;
 	while (y < (data->map->rows))
 	{
 		buc.y = y;

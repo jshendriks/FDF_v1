@@ -6,7 +6,7 @@
 #    By: jhendrik <marvin@42.fr>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/28 11:19:10 by jhendrik      #+#    #+#                  #
-#    Updated: 2023/09/27 11:02:33 by jagna         ########   odam.nl          #
+#    Updated: 2023/09/27 12:26:29 by jagna         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRCFILES := Parsing/init_coordinate_array.c \
 			Utils/fdf_atoi.c \
 			Utils/math.c \
 			Utils/scaling.c \
+			Utils/get_scale_mult.c \
 			Utils/translating.c \
 			Utils/terminate.c \
 			Utils/critical_values_x.c \
